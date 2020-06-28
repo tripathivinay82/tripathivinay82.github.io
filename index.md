@@ -5,6 +5,11 @@
 ### Network Automation
 
 - [Programmable Flexible Tunnel](https://github.com/tripathivinay82/jnpr-flex-route/)
+
+---
+
+### Python 
+
 - [Python Exercise](https://github.com/tripathivinay82/MyPython/)
 
 ---
@@ -12,14 +17,6 @@
 ### Networking Technologies
 
 - [Project 1 Title](http://example.com/)
-
-
----
-
-### TBD
-
-[Project 1 Title](/sample_page)
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 
 ---
