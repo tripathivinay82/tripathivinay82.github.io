@@ -2,6 +2,17 @@
 
 **Project description:** Instructions to setup Telemtry using Secure gRPC (SSL) and OpenConfig (data format) between Juniper MX and Ubuntu 
 
+### Steps to setup and start Telemetry using gRPC/SSL
+
+``` sh
+	- Generate the root/client(Ubuntu) and router/server certificate
+	- Copy the router’s local certificate and root CA certificate to the router 
+	- Configure the local certificate and CA profile on MX
+	- Load the root CA certificate into the CA profile 
+	- Configure the telemetry service 
+	- Subscriber sensors from Client 
+```
+
 ### 1. Create GIT Repository for JTI Client [JTIMON](https://github.com/nileshsimaria/jtimon/)
 
 ```sh
@@ -13,23 +24,49 @@
 
 ### 2. Setup PKI (Public Key Infrastructure) using OpenSSL
 
+[Reference](https://websiteforstudents.com/create-ssl-tls-self-signed-certificates-on-ubuntu-16-04-18-04-18-10/)
+
 ```sh
-* create private key and certiciate  for client (ubuntu)
-* create private key and certiciate for server (router)
+Steps:
+* create private key and certificate  for client/root (ubuntu)
+* create private key and certificate for server (router)
 * move server .pem and .cert file to /var/tmp/ of Router 
-* move client .cert file to /var/tmp/ of Router
-* configure router
-* start JTI subscription
+* move client/root .cert file to /var/tmp/ of Router
+
+
+Client Phrase:
+key: clab123
+Cert challenge: cpwd123
+
+Server Phrase:
+key: slab123
+Cert challenge: spwd123
+
+>>> For Client 
+openssl genrsa -des3 -out client_RSA2048.key 2048
+openssl req -new -key client_RSA2048.key -out client_RSA2048.csr
+cp client_RSA2048.key client_RSA2048.key.orig 
+openssl rsa -in client_RSA2048.key.orig -out client_RSA2048.key
+openssl x509 -req -days 365 -in client_RSA2048.csr -signkey client_RSA2048.key -out client_RSA2048.crt
+*** openssl x509 -in client_RSA2048.crt -text
+cat client_RSA2048.key client_RSA2048.crt >> client_RSA2048.pem
+
+>>> For Server
+openssl genrsa -des3 -out server_RSA2048.key 2048
+openssl req -new -key server_RSA2048.key -out server_RSA2048.csr
+cp server_RSA2048.key server_RSA2048.key.orig 
+openssl rsa -in server_RSA2048.key.orig -out server_RSA2048.key
+openssl x509 -req -days 365 -in server_RSA2048.csr -signkey server_RSA2048.key -out server_RSA2048.crt
+*** openssl x509 -in server_RSA2048.crt -text
+cat server_RSA2048.key server_RSA2048.crt >> server_RSA2048.pem
 
 root@<server>:~/Cert$ ls
 	 client_RSA2048.csr
-	 client_RSA2048.key.orig
-	 client_RSA2048.crt
+	 client_RSA2048.crt >>> Root/Client Certificate
 	 client_RSA2048.pem
 	 server_RSA2048.csr
-	 server_RSA2048.key.orig
 	 server_RSA2048.key
-	 server_RSA2048.crt
+	 server_RSA2048.crt >>> Server/Router Certificate
 	 server_RSA2048.pem
 	 client_RSA2048.key
 ```
@@ -44,8 +81,12 @@ set system services extension-service request-response grpc ssl mutual-authentic
 set system services extension-service request-response grpc ssl mutual-authentication client-certificate-request require-certificate-and-verify
 set system services extension-service notification allow-clients address 0.0.0.0/0
 
-set security certificates local msee "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANB.....\n-----END CERTIFICATE-----\n"
+>> configured local certificate+key (.pem)
+set security certificates local msee load-key-file /var/tmp/server_RSA2048.pem
 set security pki ca-profile root-ca ca-identity "JNPR Internal"
+
+>> Load the root certificate into the CA profile 
+request security pki ca-certificate load ca-profile root-ca filename /var/tmp/client_RSA2048.crt 
 
 regress@IER# run file list /var/tmp/ detail 
 /var/tmp/:
@@ -88,39 +129,8 @@ root@server:~/Cert$ cat ~/telemetry/test.json
 
 ```
 
-### 5.   Key and Cert using OpenSSL at Client(Ubuntu)
 
-```sh
-[Reference](https://websiteforstudents.com/create-ssl-tls-self-signed-certificates-on-ubuntu-16-04-18-04-18-10/)
-
-Client Phrase:
-key: clab123
-Cert challenge: cpwd123
-
-Server Phrase:
-key: slab123
-Cert challenge: spwd123
-
-openssl genrsa -des3 -out client_RSA2048.key 2048
-openssl req -new -key client_RSA2048.key -out client_RSA2048.csr
-cp client_RSA2048.key client_RSA2048.key.orig 
-openssl rsa -in client_RSA2048.key.orig -out client_RSA2048.key
-openssl x509 -req -days 365 -in client_RSA2048.csr -signkey client_RSA2048.key -out client_RSA2048.crt
-openssl x509 -in client_RSA2048.crt -text
-cat client_RSA2048.key client_RSA2048.crt >> client_RSA2048.pem
-
-
-openssl genrsa -des3 -out server_RSA2048.key 2048
-openssl req -new -key server_RSA2048.key -out server_RSA2048.csr
-cp server_RSA2048.key server_RSA2048.key.orig 
-openssl rsa -in server_RSA2048.key.orig -out server_RSA2048.key
-openssl x509 -req -days 365 -in server_RSA2048.csr -signkey server_RSA2048.key -out server_RSA2048.crt
-openssl x509 -in server_RSA2048.crt -text
-cat server_RSA2048.key server_RSA2048.crt >> server_RSA2048.pem
-
-```
-
-### 6.   Verification at Server(MX)
+### 5.   Verification at Server(MX)
 
 ```sh
 regress@IER> show system connections | match 50051                                  
