@@ -24,14 +24,15 @@
 
 ### 2. Setup PKI (Public Key Infrastructure) using OpenSSL
 
-[Reference](https://websiteforstudents.com/create-ssl-tls-self-signed-certificates-on-ubuntu-16-04-18-04-18-10/)
+[Reference:1](https://websiteforstudents.com/create-ssl-tls-self-signed-certificates-on-ubuntu-16-04-18-04-18-10/)
+[Reference:2](https://github.com/nileshsimaria/jtimon/wiki/SSL)
 
 ```sh
 Steps:
 * create private key and certificate  for client/root (ubuntu)
 * create private key and certificate for server (router)
-* move server .pem and .cert file to /var/tmp/ of Router 
-* move client/root .cert file to /var/tmp/ of Router
+* move server .pem file to /var/tmp/ of Router 
+* move client/root .crt file to /var/tmp/ of Router
 
 >>> For Client 
 openssl genrsa -des3 -out client_RSA2048.key 2048
@@ -82,7 +83,6 @@ request security pki ca-certificate load ca-profile root-ca filename /var/tmp/cl
 regress@IER# run file list /var/tmp/ detail 
 /var/tmp/:
 -rw-r--r--  1 regress wheel       client_RSA2048.crt
--rw-r--r--  1 regress wheel      server_RSA2048.crt
 -rw-r--r--  1 regress wheel       server_RSA2048.pem
 
 ```
@@ -107,7 +107,7 @@ root@server:~/Cert$ cat ~/telemetry/test.json
  "clientcrt" : "/home/vinayt/Cert/client_RSA2048.crt",
  "clientkey" : "/home/vinayt/Cert/client_RSA2048.key",
  "ca" : "/home/vinayt/Cert/server_RSA2048.crt",
- "servername" : "regress"
+ "servername" : "regress" 
      }, 
     "paths": [{
 	"path": "/interfaces",
