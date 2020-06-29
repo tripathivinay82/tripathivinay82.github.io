@@ -33,15 +33,6 @@ Steps:
 * move server .pem and .cert file to /var/tmp/ of Router 
 * move client/root .cert file to /var/tmp/ of Router
 
-
-Client Phrase:
-key: clab123
-Cert challenge: cpwd123
-
-Server Phrase:
-key: slab123
-Cert challenge: spwd123
-
 >>> For Client 
 openssl genrsa -des3 -out client_RSA2048.key 2048
 openssl req -new -key client_RSA2048.key -out client_RSA2048.csr
