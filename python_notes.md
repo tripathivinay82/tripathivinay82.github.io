@@ -5,7 +5,9 @@
     - https://pypl.github.io/PYPL.html
 - Python Coding Guildelines:
   - https://www.python.org/dev/peps/pep-0008/
-
+- Python Standard Libraries:
+    - https://docs.python.org/3/library/index.html
+    
 **Python: Basics** 
 - Variables:
   - variable name, such as x, is an identifier. Identified may consist of digit, letters and underscores but may 'not' begin with "digit". 
@@ -80,7 +82,9 @@
     - max(36, 27, 12) => 36
     - decimal ( precise monetary calculations): 
     	https://docs.python.org/3.7/library/decimal.html
-	
+    - random (generate random numbers)
+    - math (performing various common mathematical calculations)
+    
     
  - Controls
 
