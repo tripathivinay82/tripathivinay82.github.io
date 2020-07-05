@@ -140,5 +140,43 @@
 			* first squares number, then terminates the function and gives the result back to the caller.
 		 * Executing a return statement without an expression terminates the function and implicitly returns the value None (or False) to the caller.
 		 * When there’s no return statement in a function, it implicitly returns the value None after executing the last statement in the function’s block.
-	
 
+    - Local and Global Variables:
+     
+		* A function’s parameters and variables defined in its block are all local variables—they can be used only inside the function and 
+		exist only while the function is executing. Trying to access a local variable outside its function’s block causes a NameError, 
+		indicating that the variable is not defined.
+		
+		* 
+		
+    - Function Parameters:
+
+		* default parameter value: 
+			When calling the function, if you omit the argument for a parameter with a default parameter value, 
+			the default value for that parameter is automatically passed
+			e.g: def rectangle_area(length=2, width=3):
+		* Keyword Arguments:
+			* When calling functions, you can use keyword arguments to pass arguments in any order.
+		* Arbitrary Argument List:
+			* The parameter name args is used by convention, but you may use any identifier. 
+			If the function has multiple parameters, the *args parameter must be the rightmost parameter.
+			```
+			def average(*args):
+			    return sum(args) /   len(args)
+			
+			average(5, 10)
+			7.5
+			average(5, 10, 15)
+			10.0
+			```
+		* Passing an Iterable’s Individual Elements as Function Arguments
+			* You can unpack a tuple’s, list’s or other iterable’s elements to pass them as individual function arguments. 
+			The * operator, when applied to an iterable argument in a function call, unpacks its elements. 
+			The following code creates a five-element grades list, then uses the expression *grades to unpack its elements as average’s arguments:
+			```
+			grades = [88, 75, 96, 55, 83]
+			average(*grades)   # this program calulates avergare of all numbers passed as argument
+			79.4
+			```
+			The call shown above is equivalent to average(88, 75, 96, 55, 83).
+			
