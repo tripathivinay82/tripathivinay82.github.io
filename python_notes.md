@@ -6,7 +6,7 @@
 - Python Coding Guildelines:
   - https://www.python.org/dev/peps/pep-0008/
 
-**Python Basics** 
+**Python: Basics** 
 - Variables:
   - variable name, such as x, is an identifier. Identified may consist of digit, letters and underscores but may 'not' begin with "digit". 
 - Type:
@@ -14,7 +14,7 @@
     Ex: Type(x) => int : in this case x contains interger 
 
 - Arthemtic Operator:
-  -  **: The exponentiation (**) operator raises one value to the power of another:
+  -  The exponentiation (**) operator raises one value to the power of another:
   - True Division (/) vs. Floor Division (//):
     - True division (/) divides a numerator by a denominator and yields a floating-point number with a decimal point, as in:
       - 7 / 4 => 1.75
@@ -26,16 +26,65 @@
 - Print function:
   - using single or double quote produces same result
   
-- docstrings:
+- Docstrings:
   - three single or double quotes are used for stating script's purpose/documentation
 
-- objects:
+- Objects:
   - Values such as 7 (an integer), 4.1 (a floating-point number) and 'dog' are all objects. Every object has a type and a value:
     - type(7) => int; type(4.1) => float; type('dog') => str
     
+  - An object’s value is the data stored in the object. The snippets above show objects of built-in types int (for integers), 
+    float (for floating-point numbers) and str (for strings).
     
+  - Variables Refer to Objects: 
+  
+  	- Assigning an object to a variable binds (associates) that variable’s name to the object. As you’ve seen, 
+	  you can then use the variable in your code to access the object’s value:
+	  e.g: 	1) x = 7 => 7; 
+	  	2) x + 10 => 17; 
+		3) x => 7
+	  After snippet step#1 assignment, the variable x refers to the integer object containing 7. 
+	  As shown in snippet step#3, snippet step#2 does not change x’s value. You can change x as follows:
+	  x = x + 10 => x = 17
+	  
+   - Dynamic Typing
+   
+    	Python uses 'dynamic typing' - it determines the type of the object a variable refers to while executing your code. 
+	We can show this by rebinding the variable x to different objects and checking their types:
+	e.g: 	4) type(x) => int
+		5) x = 4.1 
+		6) type(x) => float
+		7) x = 'dog' 
+		8) type(x) => str    
+
+- Garbage Collection:
+
+	Python creates objects in memory and removes them from memory as necessary. After snippet step#5, the variable x now refers to a float object. 
+	The integer object from snippet step#3 is no longer bound to a variable. Python automatically removes such objects from memory. 
+	This process—called garbage collection—helps ensure that memory is available for new objects you create.
+	
+
+- Build-in-functions:
+    - min(36, 27, 12) => 12
+    - max(36, 27, 12) => 36
     
-    
+ - Controls
+
+    -  print(10, 20, 30, sep=', ') => 10, 20, 30
+    -  Iterables, Lists and Iterators
+	```sh
+		total = 0
+		for number in [2, -3, 0, 17, 9]:
+		    total = total + number
+		total
+		25
+	```
+    	
+	The sequence to the right of the for statement’s in keyword must be an iterable—that is, an object from which the for statement can take 
+	one item at a time until no more items remain. Python has other iterable sequence types besides strings. 
+	One of the most common is a list, which is a comma-separated collection of items enclosed in square brackets ([ and ])
+	Each sequence has an iterator. The for statement uses the iterator “behind the scenes” to get each consecutive item until there are no more to process. 
+	The iterator is like a bookmark—it always knows where it is in the sequence, so it can return the next item when it’s called upon to do so. 
 
 ### Steps to setup and start Telemetry using gRPC/SSL
 
