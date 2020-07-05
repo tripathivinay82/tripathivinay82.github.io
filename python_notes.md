@@ -141,13 +141,23 @@
 		 * Executing a return statement without an expression terminates the function and implicitly returns the value None (or False) to the caller.
 		 * When there’s no return statement in a function, it implicitly returns the value None after executing the last statement in the function’s block.
 
-    - Local and Global Variables:
+    - Local and Global Scope:
      
 		* A function’s parameters and variables defined in its block are all local variables—they can be used only inside the function and 
 		exist only while the function is executing. Trying to access a local variable outside its function’s block causes a NameError, 
 		indicating that the variable is not defined.
 		
-		* 
+		* A local variable’s identifier has local scope. It’s “in scope” only from its definition to the end of the function’s block. 
+		It “goes out of scope” when the function returns to its caller. So, a local variable can be used only inside the function that defines it.
+		
+		* Identifiers defined outside any function (or class) have global scope—these may include functions, variables and classes. 
+		Variables with global scope are known as global variables. Identifiers with global scope can be used in a .py file or 
+		interactive session anywhere after they’re defined.
+		
+		* By default, you cannot modify a global variable in a function—when you first assign a value to a variable in a function’s block, 
+		  Python creates a new local variable
+		* To modify a global variable in a function’s block, you must use a "global" statement to declare that the variable is defined in the global scope:
+	 
 		
     - Function Parameters:
 
@@ -163,7 +173,6 @@
 			```
 			def average(*args):
 			    return sum(args) /   len(args)
-			
 			average(5, 10)
 			7.5
 			average(5, 10, 15)
@@ -179,4 +188,21 @@
 			79.4
 			```
 			The call shown above is equivalent to average(88, 75, 96, 55, 83).
+		
+		* METHODS: FUNCTIONS THAT BELONG TO OBJECTS
+			* A method is simply a function that you call on an object using the form:  "object_name.method_name(arguments)"
+			* For example, the following session creates the string variable s and assigns it the string object 'Hello'. 
+			Then the session calls the object’s lower and upper methods, which produce new strings containing all-lowercase and 
+			all-uppercase versions of the original string, leaving s unchanged:
+			```
+			1: s = 'Hello'
+			2: s.lower() 
+			  'hello'
+			3: s.upper()
+			  'HELLO'
+			4: s
+			  'Hello'	
+			```
 			
+		
+    
