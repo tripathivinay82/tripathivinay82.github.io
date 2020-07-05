@@ -98,11 +98,12 @@
 		total
 		25
 	```
-		The sequence to the right of the for statement’s in keyword must be an iterable—that is, an object from which the for statement can take 
-		one item at a time until no more items remain. Python has other iterable sequence types besides strings. 
-		One of the most common is a list, which is a comma-separated collection of items enclosed in square brackets ([ and ])
-		Each sequence has an iterator. The for statement uses the iterator “behind the scenes” to get each consecutive item until there are no more to process. 
-		The iterator is like a bookmark—it always knows where it is in the sequence, so it can return the next item when it’s called upon to do so. 
+	
+	The sequence to the right of the for statement’s in keyword must be an iterable—that is, an object from which the for statement can take 
+	one item at a time until no more items remain. Python has other iterable sequence types besides strings. 
+	One of the most common is a list, which is a comma-separated collection of items enclosed in square brackets ([ and ])
+	Each sequence has an iterator. The for statement uses the iterator “behind the scenes” to get each consecutive item until there are no more to process. 
+	The iterator is like a bookmark—it always knows where it is in the sequence, so it can return the next item when it’s called upon to do so. 
 
     - Augmented Assignment:
     
@@ -115,15 +116,29 @@
        1) Executing a break statement in a while or for immediately exits that statement
        2) Executing a continue statement in a while or for loop skips the remainder of the loop’s suite
 
+- Functions:
 
 
-### Steps to setup and start Telemetry using gRPC/SSL
+    - Custom Functions
+  
+		* function defination begins with keyword 'def' followed by name of the functions, a set of parentheses and a colon (:).
+		* function name should begin with lowercase letter and in multiword names underscore should seperate each word
+		* The required parentheses contain the function’s parameter list—a comma-separated list of parameters representing the data that the function needs to perform its task.
+		*  If the parentheses are empty, the function does not use parameters to perform its task.
 
-``` sh
-	- Generate the root/client(Ubuntu) and router/server certificate
-	- Copy the router’s local certificate and root CA certificate to the router 
-	- Configure the local certificate and CA profile on MX
-	- Load the root CA certificate into the CA profile 
-	- Configure the telemetry service 
-	- Subscriber sensors from Client 
-```
+    - Custom Function’s Docstring:
+    
+		* the first line in a function’s block should be a docstring that briefly explains the function’s purpose:
+			```sh
+			 """Calculate the square of number."""
+			 ```
+		 
+    - Returning a Result to a Function’s Caller:
+  
+		 * When a function finishes executing, it returns control to its caller—that is, the line of code that called the function.
+		 * Example:  'return number ** 2'
+			* first squares number, then terminates the function and gives the result back to the caller.
+		 * Executing a return statement without an expression terminates the function and implicitly returns the value None (or False) to the caller.
+		 * When there’s no return statement in a function, it implicitly returns the value None after executing the last statement in the function’s block.
+	
+
