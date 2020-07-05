@@ -17,21 +17,32 @@
   -  The exponentiation (**) operator raises one value to the power of another:
   - True Division (/) vs. Floor Division (//):
     - True division (/) divides a numerator by a denominator and yields a floating-point number with a decimal point, as in:
-      - 7 / 4 => 1.75
+       - 7 / 4 => 1.75
     - Floor division (//) divides a numerator by a denominator, yielding the highest integer that’s not greater than the result.
-      - 7 // 4 => 1
+       - 7 // 4 => 1
     - Remainder Operator (%): yields the remainder after the left operand is divided by the right operand:
       - 17 % 5 => 2
 
 - Print function:
   - using single or double quote produces same result
-  
+  - Keywod: 'end':
+  	```
+	for number in range(10, 0, -2):
+       	    print(number, end=' ')
+       
+	o/p: 10 8 6 4 2
+	```
+  - keyword: 'sep'
+  	```
+	print(10, 20, 30, sep=', ')
+	10, 20, 30
+	```
 - Docstrings:
   - three single or double quotes are used for stating script's purpose/documentation
 
 - Objects:
   - Values such as 7 (an integer), 4.1 (a floating-point number) and 'dog' are all objects. Every object has a type and a value:
-    - type(7) => int; type(4.1) => float; type('dog') => str
+     -type(7) => int; type(4.1) => float; type('dog') => str
     
   - An object’s value is the data stored in the object. The snippets above show objects of built-in types int (for integers), 
     float (for floating-point numbers) and str (for strings).
@@ -67,10 +78,14 @@
 - Build-in-functions:
     - min(36, 27, 12) => 12
     - max(36, 27, 12) => 36
+    - decimal ( precise monetary calculations): 
+    	https://docs.python.org/3.7/library/decimal.html
+	
     
  - Controls
 
     -  print(10, 20, 30, sep=', ') => 10, 20, 30
+    
     -  Iterables, Lists and Iterators
 	```sh
 		total = 0
@@ -79,12 +94,24 @@
 		total
 		25
 	```
-    	
-	The sequence to the right of the for statement’s in keyword must be an iterable—that is, an object from which the for statement can take 
-	one item at a time until no more items remain. Python has other iterable sequence types besides strings. 
-	One of the most common is a list, which is a comma-separated collection of items enclosed in square brackets ([ and ])
-	Each sequence has an iterator. The for statement uses the iterator “behind the scenes” to get each consecutive item until there are no more to process. 
-	The iterator is like a bookmark—it always knows where it is in the sequence, so it can return the next item when it’s called upon to do so. 
+		The sequence to the right of the for statement’s in keyword must be an iterable—that is, an object from which the for statement can take 
+		one item at a time until no more items remain. Python has other iterable sequence types besides strings. 
+		One of the most common is a list, which is a comma-separated collection of items enclosed in square brackets ([ and ])
+		Each sequence has an iterator. The for statement uses the iterator “behind the scenes” to get each consecutive item until there are no more to process. 
+		The iterator is like a bookmark—it always knows where it is in the sequence, so it can return the next item when it’s called upon to do so. 
+
+    - Augmented Assignment:
+    
+    	Abbreviate assignment expressions in which the same variable name appears on the left and right of the assignment’s =
+	  e.g 	total = total + number => total += number 
+	  	c += 7; d -= 4; e *= 5; f **= 3, etc
+		
+   - Break and Continue: 
+   
+       1) Executing a break statement in a while or for immediately exits that statement
+       2) Executing a continue statement in a while or for loop skips the remainder of the loop’s suite
+
+
 
 ### Steps to setup and start Telemetry using gRPC/SSL
 
