@@ -194,7 +194,7 @@
 			* For example, the following session creates the string variable s and assigns it the string object 'Hello'. 
 			Then the session calls the object’s lower and upper methods, which produce new strings containing all-lowercase and 
 			all-uppercase versions of the original string, leaving s unchanged:
-			```
+			```sh
 			1: s = 'Hello'
 			2: s.lower() 
 			  'hello'
@@ -203,6 +203,57 @@
 			4: s
 			  'Hello'	
 			```
-			
+
+	- IMPORT:
+		* Import Module: "import module_name" then accessed their features via each module’s name and a dot (.)
+		* Import a specific identifier from a module (such as the decimal module’s Decimal type) with a statement like: "from module_name import identifier"
+		   then used that identifier without having to precede it with the module name and a dot (.)
+		* Importing Multiple Identifiers from a Module: from math import ceil, floor
+			```sh
+			from math import ceil, floor
+			ceil(10.3)
+			11
+			floor(10.7)
+			10
+			```
+		* You can import all identifiers defined in a module with a wildcard import of the form: "from modulename import *"
+			* This makes all of the module’s identifiers available for use in your code. 
+			* Importing a module’s identifiers with a wildcard import can lead to subtle errors—it’s considered a dangerous practice that you should avoid
+		* Binding Names for Modules and Module Identifiers
+			import numpy as np
+		* Typically, when importing a module, you should use import or import as statements, then access the module through the module name or 
+		the abbreviation following the as keyword, respectively. This ensures that you do not accidentally import an identifier that conflicts with one in your code.
+	
+	- PASSING ARGUMENTS TO FUNCTIONS:
+		* In many programming languages, there are two ways to pass arguments—pass-by-value and pass-by-reference 
+		  (sometimes called call-by-value and call-by-reference, respectively):
+		* With pass-by-value, the called function receives a copy of the argument’s value and works exclusively with that copy. 
+		   Changes to the function’s copy do not affect the original variable’s value in the caller.
+		* With pass-by-reference, the called function can access the argument’s value in the caller directly and modify the value if it’s mutable.
+		* Python arguments are always passed by reference. Some people call this pass-by-object-reference, because “everything in Python is an object.”
+		* When a function call provides an argument, Python copies the argument object’s reference — not the object itself—into the corresponding parameter. 
+		  This is important for performance. Functions often manipulate large objects— frequently copying them would 
+		  consume large amounts of computer memory and significantly slow program performance.
+		* You interact with an object via a reference, which behind the scenes is that object’s address (or location) in 
+		   the computer’s memory—sometimes called a “pointer” in other languages. After an assignment like: x = 7
+		   the variable x does not actually contain the value 7. Rather, it contains a reference to an object containing 7 stored elsewhere in memory. 
+		   might say that x “points to” (that is, references) the object containing 7
+		   ```sh
+		   Variable   		Object
+		   	            +-----------
+		   |x|------------->|	  7	|
+		   	            +-----------
+		   ```         
+		* Built-In Function id and Object Identities:
+			* Let’s consider how we pass arguments to functions. First, let’s create the integer variable x mentioned above—shortly 
+			  we’ll use x as a function argument: x = 7
+			* Now x refers to (or “points to”) the integer object containing 7. No two separate objects can reside at the same address in memory, 
+			 so every object in memory has a unique address. Though we can’t see an object’s address, we can use the built-in id function to 
+			 obtain a unique int value which identifies only that object while it remains in memory
+			 id(x) => 4350477840
+			* The integer result of calling id is known as the object’s identity.4 No two objects in memory can have the same identity. 
+
+
+		
 		
     
