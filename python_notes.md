@@ -501,8 +501,113 @@
 				In [17]: colors
 				Out[17]: ('red', 'orange', 'yellow', 'green', 'blue')
 				```
+	* SEARCHING SEQUENCES:
+		* Often, you’ll want to determine whether a sequence (such as a list, tuple or string) contains a value that matches a particular key value. 
+		* Searching is the process of locating a key.
+		* List Method index
+			* List method index takes as an argument a search key—the value to locate in the list—then searches through the list from index 0 
+			and returns the index of the first element that matches the search key:
+				```sh
+				In [1]: numbers = [3, 7, 1, 4, 2, 8, 5, 6]
+				In [2]: numbers.index(5)
+				Out[2]: 6
+				```
+		* Specifying the Starting Index of a Search
+			* Using method index’s optional arguments, you can search a subset of a list’s elements. 
+			* You can use *= to multiply a sequence—that is, append a sequence to itself multiple times.
+				```sh
+				In [3]: numbers *= 2
+				In [4]: numbers
+				Out[4]: [3, 7, 1, 4, 2, 8, 5, 6, 3, 7, 1, 4, 2, 8, 5, 6]
+				```
+			* The following code searches the updated list for the value 5 starting from index 7 and continuing through the end of the list:
+				```sh
+				In [5]: numbers.index(5, 7)
+				Out[5]: 14
+				```
+		* Specifying the Starting and Ending Indices of a Search
+			* Specifying the starting and ending indices causes index to search from the starting index up to but not including the ending index location
+				* numbers.index(5, 7)
+		* Operators in and not in
+			* Operator in tests whether its right operand’s iterable contains the left operand’s value:
+				```sh
+				In [7]: 1000 in numbers
+				Out[7]: False
+				In [8]: 5 in   numbers
+				Out[8]: True
+				```
+			* operator not in tests whether its right operand’s iterable does not contain the left operand’s value:
+				```sh
+				In [9]: 1000 not in numbers
+				Out[9]: True
+				In [10]: 5 not in numbers
+				Out[10]: False
+				```
+	* OTHER LIST METHODS:
+		* Lists also have methods that add and remove elements.
+			* color_names = ['orange', 'yellow', 'green']
+		* Inserting an Element at a Specific List Index
+			* Method insert adds a new item at a specified index. The following inserts 'red' at index 0:
+				* color_names.insert(0, 'red') ==> ['red', 'orange', 'yellow', 'green']
+		* Adding an Element to the End of a List
+			* You can add a new item to the end of a list with method append:
+				* color_names.append('blue') ==> ['red', 'orange', 'yellow', 'green', 'blue']
+		* Adding All the Elements of a Sequence to the End of a List
+			* Use list method extend to add all the elements of another sequence to the end of a list:
+				* color_names.extend(['indigo', 'violet']) ==> ['red', 'orange', 'yellow', 'green', 'blue',   'indigo', 'violet']
+			* This is the equivalent of using +=. 
+		* Removing the First Occurrence of an Element in a List
+			* color_names.remove('green') ==> ['red', 'orange', 'yellow', 'blue', 'indigo',   'violet']
+		* Emptying a List
+			* color_names.clear()
+		* Reversing a List’s Elements
+			* color_names = ['red', 'orange', 'yellow', 'green', 'blue']
+			* color_names.reverse()
+			* ['blue', 'green', 'yellow', 'orange', 'red']
+		* Copying a List
+			* copied_list = color_names.copy() ==> ['blue', 'green', 'yellow', 'orange', 'red']
+	
+	* LIST COMPREHENSIONS:
+		* List comprehensions—a concise and convenient notation for creating new lists. 
+		* List comprehensions can replace many for statements that iterate over existing sequences and create new lists
+		* Mapping: Performing Operations in a List Comprehension’s Expression
+			* A list comprehension’s expression can perform tasks, such as calculations, that map elements to new values (possibly of different types). 
+			* Mapping is a common functional-style programming operation that produces a result with the same number of elements as 
+			the original data being mapped. The following comprehension maps each value to its cube with the expression item ** 3:
+				*  list3 = [item ** 3 for item in range(1, 6)] ==> list3 = [1, 8, 27, 64, 125]
+		* Filtering: List Comprehensions with if Clauses
+			* Another common functional-style programming operation is filtering elements to select only those that match a condition. 
+			* This typically produces a list with fewer elements than the data being filtered. To do this in a list comprehension, use the if clause. 
+			* The following includes in list4 only the even values produced by the for clause:
+				* list4 = [item for item in range(1, 11) if item % 2 == 0] ==> list4 = [2, 4, 6, 8, 10]
+				
+	* GENERATOR EXPRESSIONS:
+		* A generator expression is similar to a list comprehension, but creates an iterable generator object that produces values on demand. 
+		* This is known as lazy evaluation. List comprehensions use greedy evaluation—they create lists immediately when you execute them. 
+		* For large numbers of items, creating a list can take substantial memory and time. 
+		* So generator expressions can reduce your program’s memory consumption and improve performance if the whole list is not needed at once.
+		* Generator expressions have the same capabilities as list comprehensions, but you define them in parentheses instead of square brackets.
+			```sh
+			In [1]: numbers = [10, 3, 7, 1, 9, 4, 2, 8, 5, 6]
+			In [2]: for value in (x ** 2 for x in numbers if x % 2 != 0):
+			   ...:     print(value, end='  ')
+			   ...:    
+			9  49  1  81  25 
+			```
+		* To show that a generator expression does not create a list, let’s assign the preceding snippet’s generator expression to a variable and evaluate the variable:
+			```sh
+			In [3]: squares_of_odds = (x ** 2   for x in numbers if x % 2 != 0)
+			In [3]: squares_of_odds
+			Out[3]: <generator object <genexpr> at   0x1085e84c0>
+			```
+		* The text "generator object <genexpr>" indicates that square_of_odds is a generator object that was created from a generator expression (genexpr).
+	
+	* FILTER, MAP AND REDUCE:
 		
-		
+
+
+
+
 			
 
 	
