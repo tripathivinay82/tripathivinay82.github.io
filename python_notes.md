@@ -426,8 +426,83 @@
 				```
 	* DEL STATEMENT:
 		* The del statement also can be used to remove elements from a list and to delete variables from the interactive session
-			
-
+		* Deleting the Element at a Specific List Index
+			```sh
+			numbers = list(range(0,   10))
+			numbers
+			[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+			del numbers[-1]
+			numbers
+			[0, 1, 2, 3, 4, 5, 6, 7, 8]
+			```
+		* Deleting a Slice from a List
+			* The following deletes the list’s first two elements:
+				```sh
+				del numbers[0:2]
+				numbers
+				[2, 3, 4, 5, 6, 7, 8]
+				```
+	* PASSING LISTS TO FUNCTIONS:
+		* Earlier we mentioned that all objects are passed by reference and demonstrated passing an immutable object as a function argument.
+		* Here, we discuss references further by examining what happens when a program passes a mutable list object to a function.
+		* Passing an Entire List to a Function
+			* Consider the function modify_elements, which receives a reference to a list and multiplies each of the list’s element values by 2:
+				```sh
+				In [1]: def modify_elements(items):
+				   ...:     """"Multiplies   all element values in items by 2."""
+				   ...:     for i in range(len(items)):
+				   ...:         items[i] *= 2
+				   ...:
+				In [2]: numbers = [10, 3, 7, 1, 9]
+				In [3]: modify_elements(numbers)
+				In [4]: numbers
+				Out[4]: [20, 6, 14, 2, 18]
+				```
+			* Function modify_elements’ items parameter receives a reference to the original list, 
+			so the statement in the loop’s suite modifies each element in the original list object.
+		* Passing a Tuple to a Function
+			* When you pass a tuple to a function, attempting to modify the tuple’s immutable elements results in a TypeError:
+	
+	* SORTING LISTS:
+		* Sorting enables you to arrange data either in ascending or descending order.
+		* Sorting a List in Ascending Order
+			```sh
+			In [1]: numbers = [10, 3, 7, 1, 9, 4, 2, 8, 5, 6]
+			In [2]: numbers.sort()
+			In [3]: numbers
+			Out[3]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+			```
+		* Sorting a List in Descending Order
+			```sh
+			In [4]: numbers.sort(reverse=True)
+			In [5]: numbers
+			Out[5]: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+			```
+		* Built-In Function sorted
+			* Built-in function sorted returns a new list containing the sorted elements of its argument sequence—the original sequence is unmodified. 
+			The following code demonstrates function sorted for a list, a string and a tuple:
+				```sh
+				In [6]: numbers = [10, 3, 7, 1, 9, 4, 2, 8, 5, 6]
+				In [7]: ascending_numbers = sorted(numbers)
+				In [8]: ascending_numbers
+				Out[8]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+				In [9]: numbers
+				Out[9]: [10, 3, 7, 1, 9, 4, 2, 8, 5, 6]
+				In [10]: letters = 'fadgchjebi'
+				In [11]: ascending_letters = sorted(letters)
+				In [12]: ascending_letters
+				Out[12]: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+				In [13]: letters
+				Out[13]: 'fadgchjebi'
+				In [14]: colors = ('red', 'orange', 'yellow', 'green', 'blue')
+				In [15]: ascending_colors = sorted(colors)
+				In [16]: ascending_colors
+				Out[16]: ['blue', 'green', 'orange', 'red', 'yellow']
+				In [17]: colors
+				Out[17]: ('red', 'orange', 'yellow', 'green', 'blue')
+				```
+		
+		
 			
 
 	
