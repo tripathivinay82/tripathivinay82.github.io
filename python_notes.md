@@ -328,39 +328,107 @@
      - UNPACKING SEQUENCES:
 	
 		* Swapping Values Via Packing and Unpacking
-			```sh
-			1:number1 = 99
-			2:number2 = 22
-			3:number1, number2 = (number2, number1)
-			4:print(f'number1 = {number1}; number2 = {number2}')
-			number1 = 22; number2 = 99
-			```
+				```sh
+				1:number1 = 99
+				2:number2 = 22
+				3:number1, number2 = (number2, number1)
+				4:print(f'number1 = {number1}; number2 = {number2}')
+				number1 = 22; number2 = 99
+				```
 		* Accessing Indices and Values Safely with Built-in Function "enumerate"
 			* The preferred mechanism for accessing an element’s index and value is the built-in function enumerate.
 			* This function receives an iterable and creates an iterator that, for each element, returns a tuple containing the element’s index and value. 
 			* The following code uses the built-in function list to create a list containing enumerate’s results:
-			```sh
-			1:colors = ['red', 'orange', 'yellow']
-			2:list(enumerate(colors))
-			[(0, 'red'), (1, 'orange'), (2, 'yellow')]
-			```
+				```sh
+				1:colors = ['red', 'orange', 'yellow']
+				2:list(enumerate(colors))
+				[(0, 'red'), (1, 'orange'), (2, 'yellow')]
+				```
 			* Similarly the built-in function tuple creates a tuple from a sequence:
-			```sh
-			3:tuple(enumerate(colors))
-			4:((0, 'red'), (1, 'orange'), (2, 'yellow'))
-			((0, 'red'), (1, 'orange'), (2, 'yellow'))
-			```
+				```sh
+				3:tuple(enumerate(colors))
+				4:((0, 'red'), (1, 'orange'), (2, 'yellow'))
+				((0, 'red'), (1, 'orange'), (2, 'yellow'))
+				```
 			* The following for loop unpacks each tuple returned by enumerate into the variables index and value and displays them:
-			```sh
-			for index, value in enumerate(colors):
-			print(f'{index}: {value}')    
-			0: red
-			1: orange
-			2: yellow
-			```
+				```sh
+				for index, value in enumerate(colors):
+				print(f'{index}: {value}')    
+				0: red
+				1: orange
+				2: yellow
+				```
 	*  SEQUENCE SLICING:
-		* 
+		* You can slice sequences to create new sequences of the same type containing subsets of the original elements. 
+		* Slice operations can modify mutable sequences—those that do not modify a sequence work identically for lists, tuples and strings.
+		* Specifying a Slice with Starting and Ending Indices
+			* The slice copies elements from the starting index to the left of the colon (2) up to, but not including, 
+			the ending index to the right of the colon (6). The original list is not modified.
+				```sh
+				numbers = [2, 3, 5, 7, 11, 13, 17, 19]
+				numbers[2:6]
+				[5, 7, 11, 13]
+				```
+		* Specifying a Slice with Only an Ending Index:
+			* If you omit the starting index, 0 is assumed. So, the slice numbers[:6] is equivalent to the slice numbers[0:6]
+				```sh
+				numbers[:6]
+				[2, 3, 5, 7, 11, 13]
+				numbers[0:6]
+				[2, 3, 5, 7, 11, 13]
+				```
+		* Specifying a Slice with Only a Starting Index
+			* If you omit the ending index, Python assumes the sequence’s length (8 here), so snippet [5]’s slice contains the 
+			elements of numbers at indices 6 and 7:
+				```sh
+				numbers[6:]
+				[17, 19]
+				numbers[6:len(numbers)]
+				[17, 19]
+				```
+		* Specifying a Slice with No Indices
+			* Omitting both the start and end indices copies the entire sequence:
+				```sh
+				numbers[:]
+				[2, 3, 5, 7, 11, 13, 17, 19]
+				```
+		* Slicing with Steps
+			* The following code uses a step of 2 to create a slice with every other element of numbers:
+			* We omitted the start and end indices, so 0 and len(numbers) are assumed, respectively.
+				```sh
+				 numbers[::2]
+				 [2, 5, 11, 17]
+				 ```
+		* Slicing with Negative Indices and Steps
+			* You can use a negative step to select slices in reverse order. The following code concisely creates a new list in reverse order:
+				```sh
+				numbers[::-1]
+				[19, 17, 13, 11, 7, 5, 3, 2]
+				```
+			* This is equivalent to:
+				```sh
+				numbers[-1:-9:-1]
+				[19, 17, 13, 11, 7, 5, 3, 2]
+				```
+		* Modifying Lists Via Slices
+			* You can modify a list by assigning to a slice of it—the rest of the list is unchanged. 
+			* The following code replaces numbers’ first three elements, leaving the rest unchanged:
+				```sh
+				numbers[0:3] = ['two', 'three', 'five']
+				numbers
+				['two', 'three', 'five', 7, 11, 13, 17, 19]
+				```
+			* The following deletes only the first three elements of numbers by assigning an empty list to the three-element slice:
+				```sh
+				numbers[0:3] = []
+				numbers
+				[7, 11, 13, 17, 19]
+				```
+	* DEL STATEMENT:
+		* The del statement also can be used to remove elements from a list and to delete variables from the interactive session
+			
 
+			
 
 	
 	
