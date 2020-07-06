@@ -253,7 +253,116 @@
 			 id(x) => 4350477840
 			* The integer result of calling id is known as the object’s identity.4 No two objects in memory can have the same identity. 
 
+- Sequences: List and Dict:
 
+     - LIST []
+     
+     	* Lists are mutable -- their elements can be modified; string and tuple sequences are immutable—they cannot be modified
+     	* Lists typically store homogeneous data, that is, values of the same data type
+	* They also may store heterogeneous data, that is, data of many different types. 
+	* List Length : len(list-name)
+	* Accessing Elements from the End of the List with Negative Indices
+		* list's last element, can be accessed with c[-1] and its first element with c[-5]; assuming list 'c' has 5 elements.
+	* Appending to a List with:
+		* a_list += [number]
+		* When the left operand of += is a list, the right operand must be an iterable;
+	* Concatenating Lists with +:
+		* concatenated_list = list1 + list2
+		```sh
+		list1 = [10, 20, 30]
+		list2 = [40, 50]
+		concatenated_list = list1 + list2
+		concatenated_list
+		[10, 20, 30, 40, 50]
+		```
+	* Comparison Operators
+		* You can compare entire lists element-by-element using comparison operators:
+		```sh
+		a = [1, 2, 3]
+		b = [1, 2, 3]
+		a == b
+		True
+		```
 		
+     - TUPLE ():
+     
+     	* tuples are immutable and typically store heterogeneous data, but the data can be homogeneous. 
+	* A tuple’s length is its number of elements and cannot change during program execution.
+	* Accessing Tuple Elements
+		* A tuple’s elements, though related, are often of multiple types. Usually, you do not iterate over them. 
+		  Rather, you access each individually. Like list indices, tuple indices start at 0
+		  e.g: time_tuple = (9, 16, 1); time_tuple[0] => 9
+	* Adding Items to a String or Tuple
+		* As with lists, the += augmented assignment statement can be used with strings and tuples, even though they’re immutable.
+			```sh
+			1: tuple1 = (10, 20, 30)
+			2: tuple2 = tuple1
+			3: tuple2
+			(10, 20, 30)
+			```
+		* Concatenating the tuple (40, 50) to tuple1 creates a new tuple, then assigns a reference to it to the variable 
+		  tuple1—tuple2 still refers to the original tuple:
+			```sh
+			4: tuple1 += (40, 50)
+			5: tuple1
+			(10, 20, 30, 40, 50)
+			6: tuple2:
+			(10, 20, 30)
+			```
+		* Appending Tuples to Lists
+			* You can use += to append a tuple to a list:
+				```sh
+				1: numbers = [1, 2, 3, 4, 5]
+				2: numbers += (6, 7)
+				3: numbers
+				  [1, 2, 3, 4, 5, 6, 7]
+				```
+		* Tuples May Contain Mutable Objects
+			```sh
+			1: student_tuple = ('Amanda',   'Blue', [98, 75, 87])
+			2: student_tuple[2][1] = 85
+			3: student_tuple
+			   ('Amanda', 'Blue', [98, 85, 87])
+			```
+			
+     - UNPACKING SEQUENCES:
+	
+		* Swapping Values Via Packing and Unpacking
+			```sh
+			1:number1 = 99
+			2:number2 = 22
+			3:number1, number2 = (number2, number1)
+			4:print(f'number1 = {number1}; number2 = {number2}')
+			number1 = 22; number2 = 99
+			```
+		* Accessing Indices and Values Safely with Built-in Function "enumerate"
+			* The preferred mechanism for accessing an element’s index and value is the built-in function enumerate.
+			* This function receives an iterable and creates an iterator that, for each element, returns a tuple containing the element’s index and value. 
+			* The following code uses the built-in function list to create a list containing enumerate’s results:
+			```sh
+			1:colors = ['red', 'orange', 'yellow']
+			2:list(enumerate(colors))
+			[(0, 'red'), (1, 'orange'), (2, 'yellow')]
+			```
+			* Similarly the built-in function tuple creates a tuple from a sequence:
+			```sh
+			3:tuple(enumerate(colors))
+			4:((0, 'red'), (1, 'orange'), (2, 'yellow'))
+			((0, 'red'), (1, 'orange'), (2, 'yellow'))
+			```
+			* The following for loop unpacks each tuple returned by enumerate into the variables index and value and displays them:
+			```sh
+			for index, value in enumerate(colors):
+			print(f'{index}: {value}')    
+			0: red
+			1: orange
+			2: yellow
+			```
+	*  SEQUENCE SLICING:
+		* 
+
+
+	
+	
 		
     
