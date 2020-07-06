@@ -603,14 +603,54 @@
 		* The text "generator object <genexpr>" indicates that square_of_odds is a generator object that was created from a generator expression (genexpr).
 	
 	* FILTER, MAP AND REDUCE:
-		
-
-
-
+		* Filtering a Sequence’s Values with the Built-In filter Function
+			* Like data, Python functions are objects that you can assign to variables, pass to other functions and return from functions. 
+			* Functions that receive other functions as arguments are a functional-style capability called higher-order functions. 
+			* For example, filter’s first argument must be a function that receives one argument and returns True if the value should be included in the result. 
+			* The function is_odd returns True if its argument is odd. 
+			* The filter function calls is_odd once for each value in its second argument’s iterable (numbers). 
+			* Higher-order functions may also return a function as a result.
+			* Function filter returns an iterator, so filter’s results are not produced until you iterate through them. 
+			* This is another example of lazy evaluation. In snippet [3], function list iterates through the results and creates a list containing them.
+				```sh
+				In [1]: numbers = [10, 3, 7, 1, 9, 4, 2, 8, 5, 6]
+				In [2]: def is_odd(x):
+				   ...:     """Returns   True only if x is odd."""
+				   ...:     return x % 2 != 0
+				   ...:
+				In [3]: list(filter(is_odd, numbers))
+				Out[3]: [3, 7, 1, 9, 5]
+				```
+		* Using a lambda Rather than a Function:
+			* For simple functions like is_odd that return only a single expression’s value, you can use a lambda expression (or simply a lambda) 
+			   to define the function inline where it’s needed—typically as it’s passed to another function:
+			   	```sh
+				list(filter(lambda x: x   % 2 != 0, numbers))
+				[3, 7, 1, 9, 5]
+				```
+			* A lambda expression is an anonymous function—that is, a function without a name. In the filter call
+				* filter(lambda x: x % 2 != 0, numbers)
+			* the first argument is the lambda
+				* lambda x: x % 2 != 0
+			* A lambda begins with the lambda keyword followed by a comma-separated parameter list, a colon (:) and an expression. 
+			* In this case, the parameter list has one parameter named x. A lambda implicitly returns its expression’s value. 
+			* So any simple function of the form:
+				* def function_name(parameter_list):
+                		*     return expression
+			* may be expressed as a more concise lambda of the form
+				* lambda parameter_list: expression
+		* Mapping a Sequence’s Values to New Values
+			* Function map’s first argument is a function that receives one value and returns a new value—in this case, a lambda that squares its argument. 
+			* The second argument is an iterable of values to map. Function map uses lazy evaluation. 
+			* So, we pass to the list function the iterator that map returns. This enables us to iterate through and create a list of the mapped values. 
+				```sh
+				In [6]: numbers
+				Out[6]: [10, 3, 7, 1, 9, 4, 2, 8, 5, 6]
+				In [7]: list(map(lambda x: x ** 2, numbers))
+				Out[7]: [100, 9, 49, 1, 81, 16, 4, 64, 25, 36]
+				```
+			* Here’s an equivalent list comprehension:
+				* [item ** 2 for item in numbers] ==> [100, 9, 49, 1, 81, 16, 4, 64, 25, 36]
 
 			
 
-	
-	
-		
-    
