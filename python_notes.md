@@ -253,7 +253,7 @@
 			 id(x) => 4350477840
 			* The integer result of calling id is known as the object’s identity.4 No two objects in memory can have the same identity. 
 
-- Sequences: List and Dict:
+- Sequences: List and Tuple:
 
      - LIST []
      
@@ -651,6 +651,128 @@
 				```
 			* Here’s an equivalent list comprehension:
 				* [item ** 2 for item in numbers] ==> [100, 9, 49, 1, 81, 16, 4, 64, 25, 36]
+
+- Dictionaries and Sets:
+
+    * Now, we consider the built-in non-sequence collections—dictionaries and sets. We’ve discussed three built-in sequence collections—strings, lists and tuples
+    * A dictionary is an unordered collection which stores key–value pairs that map immutable keys to values, just as a conventional dictionary maps words to definitions. 
+    * A set is an unordered collection of unique immutable elements.
+    
+     - DICTIONARIES {}
+     
+     	* A dictionary’s keys must be immutable (such as strings, numbers or tuples) and unique (that is, no duplicates). 
+	* Multiple keys can have the same value, such as two different inventory codes that have the same quantity in stock.
+	* Dict Operations:
+		* len(dict_name)
+		* dict_name.clear()
+	* Dict Basic Operations:
+		```sh
+		dpm
+		Out[97]: {'jan': '31', 'apr': '30', 'jul': '31'}
+		dpm['jan']
+		Out[102]: '31'
+		dpm
+		Out[104]: {'jan': '31', 'apr': '30', 'jul': 28}
+		dpm['jul']=31
+		dpm
+		Out[106]: {'jan': '31', 'apr': '30', 'jul': 31}
+		dpm['feb']=28
+		dpm
+		Out[108]: {'jan': '31', 'apr': '30', 'jul': 31, 'feb': 28}
+		del dpm['jan']
+		dpm
+		Out[110]: {'apr': '30', 'jul': 31, 'feb': 28}
+		dpm.get('jul')
+		Out[114]: 31
+		'jul' in dpm
+		Out[115]: True
+		dpm.keys()
+		Out[116]: dict_keys(['apr', 'jul', 'feb'])
+		list(dpm)
+		Out[119]: ['apr', 'jul', 'feb']
+		list(dpm.keys())
+		Out[120]: ['apr', 'jul', 'feb']
+		list(dpm.values())
+		Out[121]: ['30', 31, 28]
+		sorted(dpm.keys())
+		Out[123]: ['apr', 'feb', 'jul']
+		```
+     	* Iterating through a Dictionary:
+		* Enumerate Dict:
+			```sh
+			dpm={'jan':'31','apr':'30','jul':'31'}
+			Out: {'jan': '31', 'apr': '30', 'jul': '31'}
+			for i,(key,value) in enumerate(dpm.items()):
+			    print(f"{i} {key} {value}")
+			0 jan 31
+			1 apr 30
+			2 jul 31
+			```
+	* Dictionary Method update:
+		* You may insert and update key–value pairs using dictionary method update
+			```sh
+			In [1]: country_codes = {}
+			In [2]: country_codes.update({'South   Africa': 'za'})
+			In [3]: country_codes
+			Out[3]: {'South Africa': 'za'}
+			```
+	*  Dictionary Comprehensions
+		* Dictionary comprehensions provide a convenient notation for quickly generating dictionaries, often by mapping one dictionary to another.
+			```sh
+			In [1]: months = {'January': 1, 'February': 2, 'March': 3}
+			In [2]: months2 = {number: name for   name, number in months.items()}
+			In [3]: months2
+			Out[3]: {1: 'January', 2: 'February', 3: 'March'}
+			```
+     - SETS {}
+     
+     	* A set is an unordered collection of unique values. 
+	* Sets may contain only immutable objects, like strings, ints, floats and tuples that contain only immutable elements. 
+	* Though sets are iterable, they are not sequences and do not support indexing and slicing with square brackets, []. 
+	* Dictionaries also do not support slicing.
+	* Creating a Set with Curly Braces
+		```sh
+		In [1]: colors = {'red', 'orange', 'yellow', 'green', 'red', 'blue'}
+		In [2]: colors
+		Out[2]: {'blue', 'green', 'orange', 'red', 'yellow'}
+		```
+		* Notice that the duplicate string 'red' was ignored (without causing an error). 
+		* An important use of sets is duplicate elimination, which is automatic when creating a set.
+	* Checking Whether a Value Is in a Set
+		* You can check whether a set contains a particular value using the in and not in operators:
+			```sh
+			In [4]: 'red' in colors
+			Out[4]: True
+			In [5]: 'purple' in colors
+			Out[5]: False
+			In [6]: 'purple' not in colors
+			Out[6]: True
+			```
+	* Iterating Through a Set:
+		* Sets are iterable, so you can process each set element with a for loop:
+			```sh
+			In [7]: for color in colors:
+		   	print(color.upper(), end='   ')   
+			RED GREEN YELLOW BLUE ORANGE
+			```
+	* Creating a Set with the Built-In set Function
+		* You can create a set from another collection of values by using the built-in set function
+			```sh
+			In [8]: numbers = list(range(10))   + list(range(5))
+			In [9]: numbers
+			Out[9]: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4]
+			In [10]: set(numbers)
+			Out[10]: {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+			```
+		* If you need to create an empty set, you must use the set function with empty parentheses, rather than empty braces, {}, which represent an empty dictionary:
+			```sh
+			In [11]: set()
+			Out[11]: set()
+			```
+		
+
+	
+
 
 			
 
