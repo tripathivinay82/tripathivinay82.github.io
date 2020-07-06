@@ -769,7 +769,89 @@
 			In [11]: set()
 			Out[11]: set()
 			```
-		
+	* Comparing Sets:
+		* Various operators and methods can be used to compare sets. The following sets contain the same values, so == returns True and != returns False.
+			```sh
+			In [1]: {1, 3, 5} == {3, 5, 1}
+			Out[1]: True
+			In [2]: {1, 3, 5} != {3, 5, 1}
+			Out[2]: False
+			```
+		* You may also check for an improper subset with the set method issubset:
+			```sh
+			In [7]: {1, 3, 5}.issubset({3, 5, 1})
+			Out[7]: True
+			In [8]: {1, 2}.issubset({3, 5, 1})
+			Out[8]: False
+			```
+		* You may also check for an improper superset with the set method issuperset:
+			```sh
+			In [14]: {1, 3, 5}.issuperset({3, 5, 1})
+			Out[14]: True
+			In [15]: {1, 3, 5}.issuperset({3, 2})
+			Out[15]: False
+			```
+	* Mathematical Set Operations
+		* Union:
+			* The union of two sets is a set consisting of all the unique elements from both sets. 
+			* You can calculate the union with the | operator or with the set type’s union method:
+				```sh
+				In [1]: {1, 3, 5} | {2, 3, 4}
+				Out[1]: {1, 2, 3, 4, 5}
+				In [2]: {1, 3, 5}.union([20, 20, 3, 40, 40])
+				Out[2]: {1, 3, 5, 20, 40}
+				```
+	* Mutable Set Operators and Methods
+		* Mutable Mathematical Set Operations
+			* Like operator |, union augmented assignment |= performs a set union operation, but |= modifies its left operand:
+				```sh
+				In [1]: numbers = {1, 3, 5}
+				In [2]: numbers |= {2, 3, 4}
+				In [3]: numbers
+				Out[3]: {1, 2, 3, 4, 5}
+				```
+			* Similarly, the set type’s update method performs a union operation modifying the set on which it’s called—the argument can be any iterable:
+				```sh
+				In [4]: numbers.update(range(10))
+				In [5]: numbers
+				Out[5]: {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+				```
+	* Methods for Adding and Removing Elements
+		* Set method add inserts its argument if the argument is not already in the set; otherwise, the set remains unchanged:
+			```sh
+			In [6]: numbers.add(17)
+			In [7]: numbers.add(3)
+			In [8]: numbers
+			Out[8]: {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17}
+			```
+		* Set method remove removes its argument from the set—a KeyError occurs if the value is not in the set:
+			```sh
+			In [9]: numbers.remove(3)
+			In [10]: numbers
+			Out[10]: {0, 1, 2, 4, 5, 6, 7, 8, 9, 17}
+			```
+		* You also can remove an arbitrary set element and return it with pop, but sets are unordered, so you do not know which element will be returned:
+			```sh
+			In [11]: numbers.pop()
+			Out[11]: 0
+			In [12]: numbers
+			Out[12]: {1, 2, 4, 5, 6, 7, 8, 9, 17}
+			```
+		* method clear empties the set on which it’s called:
+			```sh
+			In [13]: numbers.clear()
+			In [14]: numbers
+			Out[14]: set()
+			```
+	* Set Comprehensions
+		* Like dictionary comprehensions, you define set comprehensions in curly braces.
+			```sh
+			In [1]: numbers = [1, 2, 2, 3, 4, 5, 6, 6, 7, 8, 9, 10, 10]
+			In [2]: evens = {item for item in numbers if item % 2 == 0}
+			In [3]: evens
+			Out[3]: {2, 4, 6, 8, 10}
+			```
+	
 
 	
 
