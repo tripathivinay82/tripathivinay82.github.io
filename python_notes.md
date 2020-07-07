@@ -851,8 +851,150 @@
 			In [3]: evens
 			Out[3]: {2, 4, 6, 8, 10}
 			```
-	
 
+- STRING and REGEX:
+
+    * String and Regex
+    
+     - CONCATENATING AND REPEATING STRINGS:
+     		* The + operator to concatenate strings and the * operator to repeat strings. 
+		* You also can perform these operations with augmented assignments. 
+		* Strings are immutable, so each operation assigns a new string object to the variable:
+			```sh
+			In [1]: s1 = 'happy'
+			In [2]: s2 = 'birthday'
+			In [3]: s1 += ' ' + s2
+			In [4]: s1
+			Out[4]: 'happy birthday'
+			In [5]: symbol = '>'
+			In [6]: symbol *= 5
+			In [7]: symbol
+			Out[7]: '>>>>>'
+			```
+    - STRIPPING WHITESPACE FROM STRINGS and Other Operations:
+    		* Removing Leading and Trailing Whitespace
+			```sh
+			In [1]: sentence = '\t  \n  This is a   test string. \t\t \n'
+			In [2]: sentence.strip()
+			Out[2]: 'This is a test string.'
+			```
+		* Removing Leading Whitespace
+			```sh
+			In [3]: sentence.lstrip()
+			Out[3]: 'This is a test string. \t\t \n'
+			```
+		* Removing Trailing Whitespace
+			```sh
+			In [4]: sentence.rstrip()
+			Out[4]: '\t  \n  This is a test string.'
+			```
+		* CHANGING CHARACTER CASE
+			* 'happy birthday'.capitalize()  ==> 'Happy birthday'
+		* Capitalizing the First Character of Every Word in a String
+			* 'strings: a deeper look'.title() ==> 'Strings: A Deeper Look'
+		* COMPARISON OPERATORS FOR STRINGS
+			* 'Orange' == 'orange' ==> False
+			* 'Orange' != 'orange' ==> True
+		* SEARCHING FOR SUBSTRINGS
+				* sentence = 'to be or not to   be that is the question' ==> sentence.count('to') ==> 2
+				* sentence.count('to', 12) ==> 1
+		* Locating a Substring in a String
+			* String method index searches for a substring within a string and returns the first index at which the substring is found
+				* sentence.index('be') ==> 3
+			* String method rindex performs the same operation as index, but searches from the end of the string and returns the last index at 
+			which the substring is found
+				* sentence.rindex('be') ==> 16
+			* String methods find and rfind perform the same tasks as index and rindex but, if the substring is not found, 
+			return -1 rather than causing a Value-Error.
+		* Determining Whether a String Contains a Substring
+			* If you need to know only whether a string contains a substring, use operator in or not in:
+				* 'that' in sentence ==> True
+				* 'THAT' not in sentence ==> true
+		* Locating a Substring at the Beginning or End of a String
+			* String methods startswith and endswith return True if the string starts with or ends with a specified substring:
+				* sentence.startswith('to') ==> True
+				* sentence.endswith('question') ==> True
+		* REPLACING SUBSTRINGS
+			* A common text manipulation is to locate a substring and replace its value. Method replace takes two substrings. 
+				* values = '1\t2\t3\t4\t5'
+				* values.replace('\t', ',') ==> '1,2,3,4,5'
+		*  SPLITTING AND JOINING STRINGS
+			* Splitting Strings
+				```sh
+				In [1]: letters = 'A, B, C, D'
+				In [2]: letters.split(', ')
+				Out[2]: ['A', 'B', 'C', 'D']
+				--- If you provide an integer as the second argument, it specifies the maximum number of splits.
+				In [3]: letters.split(', ', 2)
+				Out[3]: ['A', 'B', 'C, D']
+				```
+			* Joining Strings
+				* String method join concatenates the strings in its argument, which must be an iterable containing only string values
+					```sh
+					In [4]: letters_list = ['A', 'B', 'C', 'D']
+					In [5]: ','.join(letters_list)
+					Out[5]: 'A,B,C,D'
+					```
+		* String Method splitlines
+			* Method splitlines returns a list of new strings representing the lines of text split at each newline character in the original string. 
+				```sh
+				In [12]: lines = """This   is line 1
+				    ...: This is line2
+				    ...: This is   line3"""
+				In [13]: lines
+				Out[13]: 'This is line 1\nThis is line2\nThis is line3'
+				In [14]: lines.splitlines()
+				Out[14]: ['This is line 1', 'This is line2', 'This is   line3']
+				###Passing True to splitlines keeps the newlines at the end of each string:
+				In [15]: lines.splitlines(True)
+				Out[15]: ['This is line 1\n', 'This is line2\n', 'This is   line3']
+				```
+		* CHARACTERS AND CHARACTER-TESTING METHODS
+			```sh
+			isalnum()
+			Returns True if the string contains only alphanumeric characters (i.e., digits and letters).
+			isalpha()
+			Returns True if the string contains only alphabetic characters (i.e., letters).
+			isdecimal()
+			Returns True if the string contains only decimal integer characters (that is, base 10 integers) and does not contain a + or - sign.
+			isdigit()
+			Returns True if the string contains only digits (e.g., '0', '1', '2').
+			isidentifier()
+			Returns True if the string represents a valid identifier.
+			islower()
+			Returns True if all alphabetic characters in the string are lowercase characters (e.g., 'a', 'b', 'c').
+			isnumeric()
+			Returns True if the characters in the string represent a numeric value without a + or - sign and without a decimal point.
+			isspace()
+			Returns True if the string contains only whitespace characters.
+			istitle()
+			Returns True if the first character of each word in the string is the only uppercase character in the word.
+			isupper()
+			Returns True if all alphabetic characters in the string are uppercase characters (e.g., 'A', 'B', 'C').
+			Example:
+			In [1]: '-27'.isdigit()
+			Out[1]: False
+			In [2]: '27'.isdigit()
+			Out[2]: True
+			```
+		* RAW STRINGS
+			* Recall that backslash characters in strings introduce escape sequences—like \n for newline and \t for tab. 
+			* So, if you wish to include a backslash in a string, you must use two back-slash characters \\. 
+			* This makes some strings difficult to read. For example, Microsoft Windows uses backslashes to separate folder names when specifying a file’s location. 			 * To represent a file’s location on Windows, you might write:
+				```sh
+				In [1]: file_path = 'C:\\MyFolder\\MySubFolder\\MyFile.txt'
+				In [2]: file_path
+				Out[2]: 'C:\\MyFolder\\MySubFolder\\MyFile.txt'
+				```
+			* For such cases, raw strings—preceded by the character r—are more convenient. 
+			* They treat each backslash as a regular character, rather than the beginning of an escape sequence:
+				```sh
+				In [3]: file_path = r'C:\MyFolder\MySubFolder\MyFile.txt'
+				In [4]: file_path
+				Out[4]: 'C:\\MyFolder\\MySubFolder\\MyFile.txt'
+				```
+		
+				
 	
 
 
