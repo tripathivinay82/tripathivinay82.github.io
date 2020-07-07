@@ -994,12 +994,147 @@
 				Out[4]: 'C:\\MyFolder\\MySubFolder\\MyFile.txt'
 				```
 		* REGULAR EXPRESSIONS
-			* You’ll rarely need to create your own regular expressions for common items like these. Websites like
-				https://regex101.com
-				http://www.regexlib.com
-				https://www.regular-expressions.info
-			* 
-	
+			* Useful Websites for REGEX
+				* https://regex101.com
+				* http://www.regexlib.com
+				* https://www.regular-expressions.info
+			* re Module and Function fullmatch:
+				* import regex:
+					* import re
+				* Matching Literal Characters
+					* One of the simplest regular expression functions is fullmatch, which checks whether the entire string in its 
+					   second argument matches the pattern in its first argument
+					   	```sh
+						In [2]: pattern = '02215'
+						In [3]: 'Match' if re.fullmatch(pattern, '02215')   else 'No match'
+						Out[3]: 'Match'
+						In [4]: 'Match' if re.fullmatch(pattern, '51220')   else 'No match'
+						Out[4]: 'No match'
+						```
+				* Metacharacters, Character Classes and Quantifiers
+					* Regular expressions typically contain various special symbols called metacharacters
+						* [] {} () \ * + ^ $ ? . |
+					* The \ metacharacter begins each of the predefined character classes, each matching a specific set of characters. 
+					* Let’s validate a five-digit ZIP Code:
+						```sh
+						In [5]: 'Valid' if re.fullmatch(r'\d{5}', '02215') else 'Invalid'
+						Out[5]: 'Valid'
+						In [6]: 'Valid' if re.fullmatch(r'\d{5}', '9876') else 'Invalid'
+						Out[6]: 'Invalid'
+						```
+					* In the regular expression \d{5}, \d is a character class representing a digit (0–9). 
+					* A character class is a regular expression escape sequence that matches one character. 
+					* To match more than one, follow the character class with a quantifier.
+					* The quantifier {5} repeats \d five times, as if we had written \d\d\d\d\d, to match five consecutive digits. 
+					* In snippet [6], fullmatch returns None because '9876' contains only four consecutive digit characters.
+				* Other Predefined Character Classes
+					* The table below shows some common predefined character classes and the groups of characters they match.
+						```sh
+						Character class		Matches
+						\d			Any digit (0–9).
+						\D			Any character that is not a digit.
+						\s			Any whitespace character (such as spaces, tabs and newlines).
+						\S			Any character that is not a whitespace character.
+						\w			Any word character (also called an alphanumeric character)—that is, 
+									any uppercase or lowercase letter, any digit or an underscore
+						\W			Any character that is not a word character.
+						```
+				* Custom Character Classes
+					* Square brackets, [], define a custom character class that matches a single character. 
+					* For example, [aeiou] matches a lowercase vowel, [A-Z] matches an uppercase letter, [a-z] 
+					  matches a lowercase letter and [a-zA-Z] matches any lowercase or uppercase letter.
+					  	```sh
+						In [7]: 'Valid' if re.fullmatch('[A-Z][a-z]*',   'Wally') else 'Invalid'
+						Out[7]: 'Valid'
+						In [8]: 'Valid' if re.fullmatch('[A-Z][a-z]*',   'eva') else 'Invalid'
+						Out[8]: 'Invalid'
+						```
+					* A first name might contain many letters. The * quantifier matches zero or more occurrences of the subexpression to 
+					  its left (in this case, [a-z]). So [A-Z][a-z]* matches an uppercase letter followed by zero or more lowercase letters, 
+					  such as 'Amanda', 'Bo' or even 'E'.
+					* When a custom character class starts with a caret (^), the class matches any character that’s not specified. 
+					  So [^a-z] matches any character that’s not a lowercase letter:
+						```sh
+						In [9]: 'Match' if re.fullmatch('[^a-z]', 'A') else 'No match'
+						Out[9]: 'Match'
+						In [10]: 'Match' if re.fullmatch('[^a-z]', 'a') else 'No match'
+						Out[10]: 'No match'
+						```
+					* Metacharacters in a custom character class are treated as literal characters—that is, the characters themselves. 
+					  So [*+$] matches a single *, + or $ character:
+					  	```sh
+						In [11]: 'Match' if re.fullmatch('[*+$]', '*') else 'No match'
+						Out[11]: 'Match'
+						In [12]: 'Match' if re.fullmatch('[*+$]', '!') else 'No match'
+						Out[12]: 'No match'
+						```
+					* "* vs. + Quantifier"
+						* If you want to require at least one lowercase letter in a first name, you can replace 
+						  the * quantifier in snippet [7] with +, which matches at least one occurrence of a subexpression:
+						  	```sh
+							In [13]: 'Valid' if re.fullmatch('[A-Z][a-z]+',   'Wally') else 'Invalid'
+							Out[13]: 'Valid'
+							In [14]: 'Valid' if re.fullmatch('[A-Z][a-z]+',   'E') else 'Invalid'
+							Out[14]: 'Invalid'
+							```
+						* Both * and + are greedy—they match as many characters as possible. 
+						* So the regular expression [A-Z][a-z]+ matches 'Al', 'Eva', 'Samantha', 'Benjamin' and 
+						   any other words that begin with a capital letter followed at least one lowercase letter.
+					* Other Quantifiers:
+						* The ? quantifier matches zero or one occurrences of a subexpression:
+							```sh
+							In [15]: 'Match' if re.fullmatch('labell?ed', 'labelled') else 'No match'
+							Out[15]: 'Match'
+							In [16]: 'Match' if re.fullmatch('labell?ed',   'labeled') else 'No match'
+							Out[16]: 'Match'
+							In [17]: 'Match' if re.fullmatch('labell?ed',   'labellled') else 'No match'
+							Out[17]: 'No match'
+							```
+						* The regular expression labell?ed matches labelled (the U.K. English spelling) and labeled (the U.S. English spelling), 
+						   but not the misspelled word labellled. 
+						* You can match at least n occurrences of a subexpression with the {n,} quantifier. 
+						  The following regular expression matches strings containing at least three digits:
+						  	```sh
+							In [18]: 'Match' if re.fullmatch(r'\d{3,}',   '123') else 'No match'
+							Out[18]: 'Match'
+							In [19]: 'Match' if re.fullmatch(r'\d{3,}',   '1234567890') else 'No match'
+							Out[19]: 'Match'
+							In [20]: 'Match' if re.fullmatch(r'\d{3,}', '12') else 'No match'
+							Out[20]: 'No match'
+							```
+						* You can match between n and m (inclusive) occurrences of a subexpression with the {n,m} quantifier.
+						  The following regular expression matches strings containing 3 to 6 digits:
+						  	```sh
+							In [21]: 'Match' if re.fullmatch(r'\d{3,6}',   '123') else 'No match'
+							Out[21]: 'Match'
+							In [22]: 'Match' if re.fullmatch(r'\d{3,6}',   '123456') else 'No match'
+							Out[22]: 'Match'
+							In [23]: 'Match' if re.fullmatch(r'\d{3,6}', '1234567') else 'No match'
+							Out[23]: 'No match'
+							In [24]: 'Match' if re.fullmatch(r'\d{3,6}', '12') else 'No match'
+							Out[24]: 'No match'
+							```
+					* Replacing Substrings and Splitting Strings:
+						* The re module provides function sub for replacing patterns in a string, and function split for 
+						  breaking a string into pieces, based on patterns.
+						* Function sub—Replacing Patterns
+							* By default, the re module’s sub function replaces all occurrences of a pattern with the replacement text you specify. 							  Let’s convert a tab-delimited string to comma-delimited:
+								```sh
+								In [1]: import re
+								In [2]: re.sub(r'\t', ', ', '1\t2\t3\t4')
+								Out[2]: '1, 2, 3, 4'
+								```
+							* The sub function receives three required arguments:
+								* the pattern to match (the tab character '\t')
+								* the replacement text (', ') and
+								* the string to be searched ('1\t2\t3\t4')
+								and returns a new string. The keyword argument count can be used to specify the maximum number of replacements:
+							* The keyword argument count can be used to specify the maximum number of replacements:
+								```sh
+								In [3]: re.sub(r'\t', ', ', '1\t2\t3\t4',   count=2)
+								Out[3]: '1, 2, 3\t4'
+								```
+							
 
 
 			
