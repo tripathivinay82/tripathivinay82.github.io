@@ -993,8 +993,12 @@
 				In [4]: file_path
 				Out[4]: 'C:\\MyFolder\\MySubFolder\\MyFile.txt'
 				```
-		
-				
+		* REGULAR EXPRESSIONS
+			* You’ll rarely need to create your own regular expressions for common items like these. Websites like
+				https://regex101.com
+				http://www.regexlib.com
+				https://www.regular-expressions.info
+			* 
 	
 
 
