@@ -1134,8 +1134,72 @@
 								In [3]: re.sub(r'\t', ', ', '1\t2\t3\t4',   count=2)
 								Out[3]: '1, 2, 3\t4'
 								```
-							
-
+						* Function split
+							* The split function tokenizes a string, using a regular expression to specify the delimiter, 
+							  and returns a list of strings. 
+								```sh
+								In [4]: re.split(r',\s*', '1,  2,  3,4,    5,6,7,8')
+								Out[4]: ['1', '2', '3', '4', '5', '6', '7', '8']
+								```
+							* Use the keyword argument maxsplit to specify the maximum number of splits:
+								```sh
+								In [5]: re.split(r',\s*', '1,  2,  3,4,    5,6,7,8', maxsplit=3)
+								Out[5]: ['1', '2', '3', '4,    5,6,7,8']
+								```
+					* Other Search Functions; Accessing Matches
+						* Function search—Finding the First Match Anywhere in a String
+							* Function search looks in a string for the first occurrence of a substring that matches a regular expression and 								  returns a match object (of type SRE_Match) that contains the matching substring.
+							 	```sh
+								In [1]: import re
+								In [2]: result = re.search('Python',   'Python is fun')
+								In [3]: result.group() if result   else 'not found'
+								Out[3]: 'Python'
+								```
+							* Function search returns None if the string does not contain the pattern:
+								```sh
+								In [4]: result2 = re.search('fun!',   'Python is fun')
+								In [5]: result2.group() if   result2 else 'not found'
+								Out[5]: 'not found'
+								```
+						* Ignoring Case with the Optional flags Keyword Argument
+							```sh
+							In [6]: result3 = re.search('Sam',   'SAM WHITE', flags=re.IGNORECASE)
+							In [7]: result3.group() if   result3 else 'not found'
+							Out[7]: 'SAM'
+							```
+					* Function findall and finditer—Finding All Matches in a String
+						* Function findall finds every matching substring in a string and returns a list of the matching substrings. 
+							```sh
+							In [16]: contact = 'Wally White,   Home: 555-555-1234, Work: 555-555-4321'
+							In [17]: re.findall(r'\d{3}-\d{3}-\d{4}',   contact)
+							Out[17]: ['555-555-1234', '555-555-4321']
+							```
+						* Function finditer works like findall, but returns a lazy iterable of match objects.
+						* For large numbers of matches, using finditer can save memory because it returns one match at a time, 
+						  whereas findall returns all the matches at once:
+							```sh
+							In [18]: for phone in re.finditer(r'\d{3}-\d{3}-\d{4}',   contact):
+							    ...:     print(phone.group())
+							    ...:    
+							555-555-1234
+							555-555-4321
+							```
+					* Capturing Substrings in a Match
+						* You can use parentheses metacharacters—( and )—to capture substrings in a match. 
+							```sh
+							In [19]: text = 'Charlie Cyan,   e-mail: demo1@deitel.com'
+							In [20]: pattern = r'([A-Z][a-z]+   [A-Z][a-z]+), e-mail: (\w+@\w+\.\w{3})'
+							In [21]: result = re.search(pattern, text)
+							In [22]: result.groups()
+							Out[22]: ('Charlie Cyan', 'demo1@deitel.com')
+							In [23]: result.group()
+							Out[23]: 'Charlie Cyan, e-mail: demo1@deitel.com'
+							In [24]: result.group(1)
+							Out[24]: 'Charlie Cyan'
+							In [25]: result.group(2)
+							Out[25]: 'demo1@deitel.com'
+							```
+						
 
 			
 
