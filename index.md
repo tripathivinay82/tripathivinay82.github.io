@@ -4,7 +4,7 @@
 
 ### Network Automation
 
-- [Juniper Programmable Flexible Tunnel](https://github.com/tripathivinay82/flex-route/)
+- [Juniper Programmable Flexible Tunnel](https://github.com/tripathivinay82/flex_route)
 - [Juniper Telemetry Interface](/JTI_gRPC_SSL)
 
 ---
